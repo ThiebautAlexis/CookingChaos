@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: b0b0350c3df04764b8581b77ffabdbfc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - recipeAssetInspector_UXML: {fileID: 9197481963319205126, guid: 2f48bba7ebfd4fa43a81137375b285c2, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

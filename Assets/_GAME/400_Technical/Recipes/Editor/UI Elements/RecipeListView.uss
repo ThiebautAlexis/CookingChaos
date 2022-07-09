@@ -1,0 +1,6 @@
+#unity-list-view__remove-button {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
