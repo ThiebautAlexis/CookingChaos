@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 namespace CookingChaos
 {
@@ -13,19 +14,46 @@ namespace CookingChaos
         #endregion
 
         #region Fields and Properties
-        
-        [SerializeField] private List<RecipeInstruction> instructions = new List<RecipeInstruction>();
+
+        [SerializeField] private RecipeInstruction[] instructions = new RecipeInstruction[] { };
+        private int index = 0;
         #endregion
 
         #region Methods 
-        [ContextMenu("Instruction/Add Instruction")]
-        public void AddInstruction()
+        public void Enable()
         {
-            RecipeInstruction _instruction = CreateInstance<RecipeInstruction>();
-            _instruction.name = "Recipe Instruction";
-            AssetDatabase.AddObjectToAsset(_instruction, this);
-            instructions.Add(_instruction);
-            AssetDatabase.SaveAssets();
+            index = 0;
+            instructions[index].Activate();
+        }
+
+        public void OnUpdate()
+        {
+            if (index == instructions.Length) return;
+
+            int _state = instructions[index].GetInstructionState();
+            Debug.Log(_state);
+            
+            if (_state == 0)
+            {
+                // Instruction On Hold
+            }
+            else if (_state == 1)
+            {
+                instructions[index].Deactivate();
+                index++;
+                if(index == instructions.Length)
+                {
+                    // Recipe Complete!
+                    return;
+                }
+                instructions[index].Activate();
+                // Instruction Successful
+            }
+            else if (_state == -1)
+            {
+                // // Instruction Failed
+            }
+            
         }
         #endregion
     }

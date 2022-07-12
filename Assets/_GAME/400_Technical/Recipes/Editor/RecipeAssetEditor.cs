@@ -50,6 +50,7 @@ namespace CookingChaos.Recipe.Editor
 
             RecipeInstruction _instruction = CreateInstance<RecipeInstruction>();
             _instruction.name = $"{serializedObject.targetObject.name} Instruction {_index.ToString("000")}";
+            _instruction.Index = _index;
             AssetDatabase.AddObjectToAsset(_instruction, serializedObject.targetObject);
             
             recipeInstructionsProperty.GetArrayElementAtIndex(_index).objectReferenceValue = _instruction;
@@ -74,10 +75,14 @@ namespace CookingChaos.Recipe.Editor
             void SelectInstruction(DropdownMenuAction evt) => EditorGUIUtility.PingObject(_item.value);
             void DeleteInstruction(DropdownMenuAction evt)
             {
-                UnityEngine.Object _object = _item.value;
-                
-                AssetDatabase.RemoveObjectFromAsset(_object);
-                AssetDatabase.SaveAssets();
+                RecipeInstruction _instruction = _item.value as RecipeInstruction;
+                if(_instruction != null)
+                {
+                    recipeInstructionsProperty.DeleteArrayElementAtIndex(_instruction.Index);
+                    serializedObject.ApplyModifiedProperties();
+                    AssetDatabase.RemoveObjectFromAsset(_instruction);
+                    AssetDatabase.SaveAssets();
+                }
             }
 
             return _item;
