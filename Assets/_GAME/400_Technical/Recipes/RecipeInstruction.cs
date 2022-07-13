@@ -36,45 +36,46 @@ namespace CookingChaos
         /// 1 = Right Input performed
         /// </summary>
         /// <returns>Return an int according to the state of the Instruction</returns>
-        public int GetInstructionState()
+        public InstructionState GetInstructionState(out string _eventKey)
         {
+            _eventKey = string.Empty;
             for (int i = 0; i < inputActions.actions.Count; i++)
             {
                 if (inputActions.actions[i].WasPerformedThisFrame())
                 {
                     inputActions.actions[i].Disable();
                     progress += 1f / inputActions.actions.Count;
+                    _eventKey = inputActions.actions[i].name;
                     
                     if(progress == 1f)
                     {
-                        // Success of all instructions - Callback here 
-                        return 1;
+                        // Success of all instructions - Callback here
+                        return InstructionState.Success;
                     }
                     Debug.Log("Input valid");
                     // Success of this instruction - Callback here 
-
-                    return 0;
+                    return InstructionState.Input;
                 }
                 string _interaction = inputActions.actions[i].interactions.Split('(')[0];
                 if (_interaction == interaction_Hold && inputActions.actions[i].IsPressed())
                 {
-                    Debug.Log("Holding");
-                    return 0;
+                    _eventKey = inputActions.actions[i].name;
+                    return InstructionState.Hold;
                 }
                 if (_interaction == interaction_MultiTap && inputActions.actions[i].WasPressedThisFrame())
                 {
-                    Debug.Log("Tapping");
-                    return 0;
+                    _eventKey = inputActions.actions[i].name;
+                    return InstructionState.MultiTap;
                 }
                     
             }
             if (AnyKeyInput.WasPerformedThisFrame())
             {
                 // Instructions Failed callback
-                return -1;
+                return InstructionState.Failed;
             }
             
-            return 0;
+            return InstructionState.None;
         }
         #endregion
     }

@@ -14,7 +14,7 @@ namespace CookingChaos
         private void OnEnable()
         {
             RecipeInstruction.AnyKeyInput.Enable();
-            recipe.Enable();
+            recipe.Activate();
         }
 
         private void OnDisable()
