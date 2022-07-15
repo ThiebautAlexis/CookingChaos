@@ -11,6 +11,7 @@ namespace CookingChaos
 
         #region static fields
         public static readonly string ReceipeInstructionsPropertyName = "instructions";
+        public static readonly string EventsHandlerPropertyName = "eventsHandler";
         #endregion
 
         #region Fields and Properties
@@ -20,64 +21,43 @@ namespace CookingChaos
         private string eventKey = string.Empty;
         #endregion
 
-        #region Methods 
+        #region Methods
+        public RecipeEventsHandler SpawnRecipeEventsHandler() => Instantiate(eventsHandler);
+
+
         public void Activate()
         {
-            Instantiate(eventsHandler);
             index = 0;
             instructions[index].Activate();
         }
 
-        public void OnUpdate()
+        public void OnUpdate(RecipeEventsHandler _spawnedHandler)
         {
             if (index == instructions.Length) return;
 
-            InstructionState _state = instructions[index].GetInstructionState(out eventKey);
+            InstructionState _state = instructions[index].GetInstructionState(out eventKey, out float _holdingProgress, out int _multitapCount);
 
             switch (_state)
             {
                 case InstructionState.Failed:
-                    OnInstructionFailed();
+                    _spawnedHandler.FailedInstructionEvent();
                     break;
                 case InstructionState.Success:
-                    OnValidInput(eventKey);
+                    _spawnedHandler.ValidInputEvent(eventKey);
                     OnInstructionSucceded();
                     break;
                 case InstructionState.Input:
-                    OnValidInput(eventKey);
+                    _spawnedHandler.ValidInputEvent(eventKey);
                     break;
                 case InstructionState.MultiTap:
-                    OnMultiTapInput(eventKey);
+                    _spawnedHandler.MultiTapInputEvent(eventKey, _multitapCount);
                     break;
                 case InstructionState.Hold:
-                    OnHoldInput(eventKey);
+                    _spawnedHandler.HoldingInputEvent(eventKey, _holdingProgress);
                     break;
                 default:
                     break;
             }            
-        }
-
-        private void OnInstructionFailed()
-        {
-            eventsHandler.FailedInstructionEvent();
-        }
-
-        private void OnValidInput(string eventKey)
-        {
-            Debug.Log("Valid Input => " + eventKey);
-            eventsHandler.ValidInputEvent(eventKey);
-        }
-
-        private void OnHoldInput(string eventKey)
-        {
-            Debug.Log("Holding " + eventKey);
-            eventsHandler.HoldingInputEvent(eventKey);
-        }
-
-        private void OnMultiTapInput(string eventKey)
-        {
-            Debug.Log("MultiTap " + eventKey);
-            eventsHandler.MultiTapInputEvent(eventKey);
         }
 
         private void OnInstructionSucceded()

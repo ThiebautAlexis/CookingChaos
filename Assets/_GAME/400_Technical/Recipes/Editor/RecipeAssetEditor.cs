@@ -14,6 +14,7 @@ namespace CookingChaos.Recipe.Editor
         public VisualTreeAsset recipeAssetInspector_UXML;
 
         private SerializedProperty recipeInstructionsProperty;
+        private SerializedProperty eventsHandlerProperty;
         private ListView listView;
         #endregion
 
@@ -21,6 +22,7 @@ namespace CookingChaos.Recipe.Editor
         private void OnEnable()
         {
             recipeInstructionsProperty = serializedObject.FindProperty(RecipeAsset.ReceipeInstructionsPropertyName);
+            eventsHandlerProperty = serializedObject.FindProperty(RecipeAsset.EventsHandlerPropertyName);
         }
 
 
@@ -29,7 +31,8 @@ namespace CookingChaos.Recipe.Editor
             // Create an empty visual Element and clone the default UMXL style. 
             VisualElement _inspectorContainer = new VisualElement();
             recipeAssetInspector_UXML.CloneTree(_inspectorContainer);
-
+            
+            // Instructions
             ListView _list = _inspectorContainer.Q<ListView>("list-view");
             _list.fixedItemHeight = EditorGUIUtility.singleLineHeight;
 
@@ -37,8 +40,13 @@ namespace CookingChaos.Recipe.Editor
             _list.itemsAdded += OnItemsAdded;
             _list.BindProperty(recipeInstructionsProperty);
             listView = _list;
-
             _inspectorContainer.Add(_list);
+
+            // Event Handler
+            PropertyField _propertyField = _inspectorContainer.Q<PropertyField>("events-handler");
+            _propertyField.BindProperty(eventsHandlerProperty);
+            _inspectorContainer.Add(_propertyField);
+
 
             return _inspectorContainer;
         }

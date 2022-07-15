@@ -1,5 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/_GAME/400_Technical/Recipes/Editor/UI%20Elements/RecipeListView.uss?fileID=7433441132597879392&amp;guid=3eb77a4867c53db48ab5806da61dc21f&amp;type=3#RecipeListView" />
-    <ui:Label text="RECIPE" display-tooltip-when-elided="true" name="title" style="-unity-font-style: bold; font-size: 14px; -unity-text-align: middle-center;" />
-    <ui:ListView focusable="true" name="list-view" show-border="true" show-alternating-row-backgrounds="All" header-title="Instructions" show-add-remove-footer="true" reorderable="false" show-bound-collection-size="false" show-foldout-header="true" horizontal-scrolling="false" />
+    <ui:Label text="RECIPE" display-tooltip-when-elided="true" name="main-title" style="-unity-text-align: upper-center; font-size: 14px;" />
+    <ui:VisualElement name="list-view-holder">
+        <ui:Label text="Instructions" display-tooltip-when-elided="true" name="title-list-view" style="-unity-font-style: bold; font-size: 12px; -unity-text-align: middle-left;" />
+        <ui:ListView focusable="true" name="list-view" show-border="true" show-alternating-row-backgrounds="All" header-title="Instructions" show-add-remove-footer="true" reorderable="false" show-bound-collection-size="false" show-foldout-header="false" horizontal-scrolling="false" />
+    </ui:VisualElement>
+    <ui:VisualElement name="events-handler-holder">
+        <ui:Label text="Events Handler" display-tooltip-when-elided="true" name="title-events-handler" style="-unity-font-style: bold;" />
+        <uie:PropertyField name="events-handler" />
+    </ui:VisualElement>
 </ui:UXML>

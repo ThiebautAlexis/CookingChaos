@@ -1,0 +1,169 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8642270477333347275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486b1287007c4e844997d0c975d412f6, type: 3}
+  m_Name: Recipe_Burger Instruction 002
+  m_EditorClassIdentifier: 
+  inputActions:
+    m_Name: Input Actions
+    m_Id: 25ec2940-2b34-4d9b-84c8-eb77962d7893
+    m_Asset: {fileID: 0}
+    m_Actions:
+    - m_Name: Flag
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: e857ba3e-e4bd-41f1-af81-d5140ae27180
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: 
+      m_Id: fee92be9-aaaf-4620-bb29-c2e090f3ebc3
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Flag
+      m_Flags: 0
+--- !u!114 &-1205774487887623920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486b1287007c4e844997d0c975d412f6, type: 3}
+  m_Name: Recipe_Burger Instruction 001
+  m_EditorClassIdentifier: 
+  inputActions:
+    m_Name: Input Actions
+    m_Id: 69d2122d-b1e5-497c-ab1f-05ae6cb51513
+    m_Asset: {fileID: 0}
+    m_Actions:
+    - m_Name: Meat
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 12ef5aec-e0bf-49b0-aea0-771f8f4ac45d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Tomato
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: a54dffbd-5be4-4e5e-a70e-007aa4f28da3
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Salad
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 24a3c6b5-830b-4675-9008-9d3252b73000
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Cheese
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: aad842f6-e5d8-4327-aabd-60cfc67f31f8
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: 
+      m_Id: 30fcd467-12cd-4276-9889-350fab667bc4
+      m_Path: <Keyboard>/m
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Meat
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 29982845-3a76-4967-8da9-9e1b8e7f1507
+      m_Path: <Keyboard>/t
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Tomato
+      m_Flags: 0
+    - m_Name: 
+      m_Id: b50fffac-8a03-4bac-a503-4fe78e605f32
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Salad
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 5992111a-4353-4104-9517-a09398f31924
+      m_Path: <Keyboard>/c
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Cheese
+      m_Flags: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0053ba18c3f2304bbf17efb8c10b110, type: 3}
+  m_Name: Recipe_Burger
+  m_EditorClassIdentifier: 
+  instructions:
+  - {fileID: 2614768922206688206}
+  - {fileID: -1205774487887623920}
+  - {fileID: -8642270477333347275}
+  eventsHandler: {fileID: 1779917338879053968, guid: 38c9b3b44cc4fc14c93e5b1670c5ffd2, type: 3}
+--- !u!114 &2614768922206688206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486b1287007c4e844997d0c975d412f6, type: 3}
+  m_Name: Recipe_Burger Instruction 000
+  m_EditorClassIdentifier: 
+  inputActions:
+    m_Name: Input Actions
+    m_Id: 3beeaf9d-1bdf-4557-8071-4053e71e8a92
+    m_Asset: {fileID: 0}
+    m_Actions:
+    - m_Name: Grill
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 7c28bb92-27ec-45e5-ae1c-e4110aa64b59
+      m_Processors: 
+      m_Interactions: Hold(duration=1.75)
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: 
+      m_Id: c38d31c1-625b-44b8-ba5a-39a0af246c96
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Grill
+      m_Flags: 0
