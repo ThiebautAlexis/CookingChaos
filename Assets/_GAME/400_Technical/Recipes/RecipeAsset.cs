@@ -31,6 +31,7 @@ namespace CookingChaos
             instructions[index].Activate();
         }
 
+        /*
         public void OnUpdate(RecipeEventsHandler _spawnedHandler)
         {
             if (index == instructions.Length) return;
@@ -59,8 +60,9 @@ namespace CookingChaos
                     break;
             }            
         }
+        */
 
-        private void OnInstructionSucceded()
+        private void OnInstructionSucceded(RecipeEventsHandler _eventsHandler)
         {
             instructions[index].Deactivate();
             index++;

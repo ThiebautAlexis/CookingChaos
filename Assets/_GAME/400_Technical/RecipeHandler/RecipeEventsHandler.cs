@@ -14,37 +14,84 @@ namespace CookingChaos
 
         #region Methods 
 
-        internal void MultiTapInputEvent(string eventKey, int _tapCount)
+        #region Multi Tap Events
+         internal void MultiTapInputEventStart(string eventKey, int _multitapLength)
         {
             for (int i = 0; i < multiTapInputEvents.Length; i++)
             {
                 if (multiTapInputEvents[i].ActivationKey == eventKey)
-                    multiTapInputEvents[i].CallEvent(_tapCount);
+                    multiTapInputEvents[i].CallEventStart(_multitapLength);
             }
         }
-        internal void HoldingInputEvent(string eventKey, float _holdingProgress)
+
+        internal void MultiTapInputEventStop(string eventKey)
+        {
+            for (int i = 0; i < multiTapInputEvents.Length; i++)
+            {
+                if (multiTapInputEvents[i].ActivationKey == eventKey)
+                    multiTapInputEvents[i].CallEventStop();
+            }
+        }
+        #endregion
+
+        #region Hold Events
+        internal void HoldingInputEventStart(string eventKey, float _holdingDuration)
         {
             for (int i = 0; i < holdingInputEvents.Length; i++)
             {
                 if (holdingInputEvents[i].ActivationKey == eventKey)
-                    holdingInputEvents[i].CallEvent(_holdingProgress);
+                    holdingInputEvents[i].CallEventStart(_holdingDuration);
             }
         }
-        internal void ValidInputEvent(string eventKey)
+
+        internal void HoldingInputEventStop(string eventKey)
+        {
+            for (int i = 0; i < holdingInputEvents.Length; i++)
+            {
+                if (holdingInputEvents[i].ActivationKey == eventKey)
+                    holdingInputEvents[i].CallEventStop();
+            }
+        }
+        #endregion
+
+        #region Input Events
+        internal void InputEventStart(string eventKey)
         {
             for (int i = 0; i < validInputEvents.Length; i++)
             {
                 if (validInputEvents[i].ActivationKey == eventKey)
-                    validInputEvents[i].CallEvent();
+                    validInputEvents[i].CallEventStart();
             }
         }
-        internal void FailedInstructionEvent()
+        internal void InputEventPerformed(string eventKey)
+        {
+            for (int i = 0; i < validInputEvents.Length; i++)
+            {
+                if (validInputEvents[i].ActivationKey == eventKey)
+                    validInputEvents[i].CallEventPerformed();
+            }
+        }
+
+        internal void InputEventStop(string eventKey)
+        {
+            for (int i = 0; i < validInputEvents.Length; i++)
+            {
+                if (validInputEvents[i].ActivationKey == eventKey)
+                    validInputEvents[i].CallEventStop();
+            }
+        }
+        #endregion
+
+        #region Failed Events
+        internal void FailedInstructionEvent(string eventKey)
         {
             for (int i = 0; i < failedInputEvents.Length; i++)
             {
-                failedInputEvents[i].CallEvent();
+                failedInputEvents[i].CallEventFailed(eventKey);
             }
         }
+        #endregion
+
         #endregion
     }
 }

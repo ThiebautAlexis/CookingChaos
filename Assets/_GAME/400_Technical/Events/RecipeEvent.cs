@@ -8,14 +8,19 @@ namespace CookingChaos
         #region Fields and Properties
         [SerializeField] protected string activationKey = string.Empty;
         public string ActivationKey => activationKey;
+
         #endregion
 
         #region Methods 
-        public abstract void CallEvent();
+        internal virtual void CallEventStart(int multitapLength) { }
+        internal virtual void CallEventStart(float holdingDuration) { }
+        internal virtual void CallEventStart() { }
 
-        public abstract void CallEvent(float _holdingProgress);
+        internal virtual void CallEventStop() { }
+        internal virtual void CallEventPerformed() { }
+        internal virtual void CallEventFailed(string eventKey) { }
 
-        public abstract void CallEvent(int _multitapCount);
+
         #endregion
     }
 }
