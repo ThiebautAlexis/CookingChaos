@@ -18,74 +18,42 @@ namespace CookingChaos
         [SerializeField] private RecipeInstruction[] instructions = new RecipeInstruction[] { };
         [SerializeField] private RecipeEventsHandler eventsHandler = null; 
         private int index = 0;
-        private string eventKey = string.Empty;
+        private RecipeEventsHandler spawnedEventsHandler = null;
         #endregion
 
         #region Methods
-        public RecipeEventsHandler SpawnRecipeEventsHandler() => Instantiate(eventsHandler);
-
-
         public void Activate()
         {
+            spawnedEventsHandler = Instantiate(eventsHandler);
             index = 0;
+            RecipeInstruction.OnInstructionSucceded += OnInstructionSucceded;
+            RecipeInstruction.OnInstructionFailed += OnInstructionFailed;
+
             instructions[index].Activate();
         }
 
-        /*
-        public void OnUpdate(RecipeEventsHandler _spawnedHandler)
-        {
-            if (index == instructions.Length) return;
-
-            InstructionState _state = instructions[index].GetInstructionState(out eventKey, out float _holdingProgress, out int _multitapCount);
-
-            switch (_state)
-            {
-                case InstructionState.Failed:
-                    _spawnedHandler.FailedInstructionEvent();
-                    break;
-                case InstructionState.Success:
-                    _spawnedHandler.ValidInputEvent(eventKey);
-                    OnInstructionSucceded();
-                    break;
-                case InstructionState.Input:
-                    _spawnedHandler.ValidInputEvent(eventKey);
-                    break;
-                case InstructionState.MultiTap:
-                    _spawnedHandler.MultiTapInputEvent(eventKey, _multitapCount);
-                    break;
-                case InstructionState.Hold:
-                    _spawnedHandler.HoldingInputEvent(eventKey, _holdingProgress);
-                    break;
-                default:
-                    break;
-            }            
-        }
-        */
-
-        private void OnInstructionSucceded(RecipeEventsHandler _eventsHandler)
+        private void OnInstructionSucceded()
         {
             instructions[index].Deactivate();
+            spawnedEventsHandler.CallSuccessInstructionEvent(index);
             index++;
-            if (index == instructions.Length)
+
+            if (index >= instructions.Length)
             {
                 // Recipe Complete!
-                Debug.Log("recipe completed");
+                RecipeInstruction.OnInstructionSucceded -= OnInstructionSucceded;
+                Destroy(spawnedEventsHandler);
                 return;
             }
-            Debug.Log("Proceed to next instruction");
             instructions[index].Activate();
+        }
+
+        private void OnInstructionFailed()
+        {
+            Debug.Log("Failed!");
+            RecipeInstruction.OnInstructionFailed -= OnInstructionSucceded;
         }
         #endregion
 
-    }
-
-    public enum InstructionState
-    {
-        Failed = -1,
-        None,
-        Success,
-        Input,
-        MultiTap,
-        Hold
     }
 }

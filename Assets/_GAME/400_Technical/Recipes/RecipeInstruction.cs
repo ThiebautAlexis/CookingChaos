@@ -9,13 +9,17 @@ namespace CookingChaos
     {
         public static readonly InputAction AnyKeyInput = new InputAction("Any Key", binding: "<Keyboard>/anyKey");
 
-        private static readonly string interaction_Hold = "Hold"; 
-        private static readonly string interaction_MultiTap = "MultiTap"; 
+        #region Events 
+        public static event Action OnInstructionSucceded;
+        public static event Action OnInstructionFailed;
+        public event Action<InputAction.CallbackContext> OnTriggerEvent;
+        #endregion
 
         #region Fields and Properties
         public int Index { get; set; }
         [SerializeField] private InputActionMap inputActions;
         private float progress = 0f;
+
         #endregion
 
         #region Methods 
@@ -29,31 +33,17 @@ namespace CookingChaos
 
         private void TriggerAction(InputAction.CallbackContext context)
         {
-            if (context.started)
-            {
-                Debug.Log($"Start {context.action.name}");
-                RecipeHandler.EventHandler.InputEventStart(context.action.name);
-                if (context.interaction is MultiTapInteraction)
-                {
-                    Debug.Log($"{context.action.name} is multitap");
-                    RecipeHandler.EventHandler.MultiTapInputEventStart(context.action.name, (context.interaction as MultiTapInteraction).tapCount);
-                }
-                if (context.interaction is HoldInteraction)
-                {
-                    Debug.Log($"{context.action.name} is hold");
-                    RecipeHandler.EventHandler.HoldingInputEventStart(context.action.name, (context.interaction as HoldInteraction).duration);
-                }
-            }
+            OnTriggerEvent?.Invoke(context);
+            // RecipeHandler.EventHandler.OnCallEvent(context);
             if(context.performed)
             {
-                RecipeHandler.EventHandler.InputEventPerformed(context.action.name);
-                Debug.Log($"Performed {context.action.name}");
                 context.action.Disable();
-            }
-            if (context.canceled)
-            {
-                Debug.Log($"Canceled {context.action.name}");
-                RecipeHandler.EventHandler.InputEventStop(context.action.name);
+                progress += (1f / inputActions.actions.Count);
+                if (progress >= 1f)
+                {
+                    OnInstructionSucceded?.Invoke();
+                    Deactivate();
+                }
             }
         }
 

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed72923cfbe402408a7a02245b3c4a5, type: 3}
+  m_Name: MoveGrillEvent
+  m_EditorClassIdentifier: 
+  targetPositions:
+  - {x: -20, y: 0}
+  attributes: {fileID: 11400000, guid: c0678480d0ae3f641bd5c492a7f50c4f, type: 2}
+  eventActivation: 1
+  overrideSortingOrder: 0

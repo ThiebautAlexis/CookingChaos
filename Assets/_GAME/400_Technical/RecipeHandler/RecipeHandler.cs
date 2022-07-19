@@ -7,7 +7,6 @@ namespace CookingChaos
     {
         #region Fields and Properties
         [SerializeField] private RecipeAsset recipe;
-        public static RecipeEventsHandler EventHandler = null;
         #endregion
 
         #region Methods 
@@ -15,7 +14,6 @@ namespace CookingChaos
         private void OnEnable()
         {
             RecipeInstruction.AnyKeyInput.Enable();
-            EventHandler = recipe.SpawnRecipeEventsHandler();
             recipe.Activate();
         }
 
