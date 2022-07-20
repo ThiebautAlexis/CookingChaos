@@ -11,10 +11,14 @@ namespace CookingChaos.InputEvents
         #endregion
 
         #region Methods 
-        public override void OnInputPerformed(SpriteRenderer _renderer)
+        public override void CallEvent(GameObject _targetObject)
         {
-            base.OnInputPerformed(_renderer);
-            _renderer.gameObject.SetActive(false);
+        }
+
+        public override void OnInputPerformed(GameObject _targetObject)
+        {
+            base.OnInputPerformed(_targetObject);
+            _targetObject.gameObject.SetActive(false);
         }
         #endregion
     }

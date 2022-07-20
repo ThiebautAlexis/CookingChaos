@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ed72923cfbe402408a7a02245b3c4a5, type: 3}
-  m_Name: MoveGrillEvent
+  m_Name: Complete - Move Event
   m_EditorClassIdentifier: 
   targetPositions:
-  - {x: -20, y: 0}
-  attributes: {fileID: 11400000, guid: c0678480d0ae3f641bd5c492a7f50c4f, type: 2}
+  - {x: -19, y: 0}
+  attributes: {fileID: 11400000, guid: 77237c317ea080f43aa65f6e8344a0d6, type: 2}
   eventActivation: 1
   overrideSortingOrder: 0
+  movementDelay: 0.75

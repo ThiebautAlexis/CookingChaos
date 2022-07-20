@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using System;
+using DG.Tweening;
 
 namespace CookingChaos
 {
@@ -12,46 +11,64 @@ namespace CookingChaos
         #region static fields
         public static readonly string ReceipeInstructionsPropertyName = "instructions";
         public static readonly string EventsHandlerPropertyName = "eventsHandler";
+
+        private float completionInterval = 1.5f;
         #endregion
+
+        public static event Action OnRecipeCompleted;
+        public static event Action<int> OnInstructionCompleted;
+        public static event Action<int> OnInstructionFailed;
 
         #region Fields and Properties
         [SerializeField] private RecipeInstruction[] instructions = new RecipeInstruction[] { };
         [SerializeField] private RecipeEventsHandler eventsHandler = null; 
         private int index = 0;
-        private RecipeEventsHandler spawnedEventsHandler = null;
         #endregion
 
         #region Methods
         public void Activate()
         {
-            spawnedEventsHandler = Instantiate(eventsHandler);
+            Instantiate(eventsHandler);
             index = 0;
-            RecipeInstruction.OnInstructionSucceded += OnInstructionSucceded;
-            RecipeInstruction.OnInstructionFailed += OnInstructionFailed;
-
+            RecipeInstruction.OnInstructionSucceded += CompleteInstruction;
+            RecipeInstruction.OnInstructionFailed += FailInstruction;
             instructions[index].Activate();
         }
 
-        private void OnInstructionSucceded()
+        public void Deactivate()
+        {
+            RecipeInstruction.OnInstructionSucceded -= CompleteInstruction;
+            RecipeInstruction.OnInstructionFailed -= FailInstruction;
+        }
+
+        private void CompleteInstruction()
         {
             instructions[index].Deactivate();
-            spawnedEventsHandler.CallSuccessInstructionEvent(index);
-            index++;
+            OnInstructionCompleted?.Invoke(index);
 
-            if (index >= instructions.Length)
+            Sequence sequence = DOTween.Sequence();
+            sequence.AppendInterval(completionInterval);
+            sequence.onComplete += GoToNextInstruction;
+
+            void GoToNextInstruction()
             {
-                // Recipe Complete!
-                RecipeInstruction.OnInstructionSucceded -= OnInstructionSucceded;
-                Destroy(spawnedEventsHandler);
-                return;
+                index++;
+                if (index >= instructions.Length)
+                {
+                    // Recipe Complete!
+                    OnRecipeCompleted?.Invoke();
+                    Deactivate();
+                    return;
+                }
+                instructions[index].Activate();
             }
-            instructions[index].Activate();
         }
 
-        private void OnInstructionFailed()
+        private void FailInstruction()
         {
             Debug.Log("Failed!");
-            RecipeInstruction.OnInstructionFailed -= OnInstructionSucceded;
+            OnInstructionFailed?.Invoke(index);
+            Deactivate();
         }
         #endregion
 

@@ -15,4 +15,6 @@ MonoBehaviour:
   targetPositions:
   - {x: 0.5, y: -4.45}
   attributes: {fileID: 11400000, guid: c0678480d0ae3f641bd5c492a7f50c4f, type: 2}
-  eventActivation: 0
+  eventActivation: 1
+  overrideSortingOrder: 0
+  movementDelay: 0

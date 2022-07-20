@@ -5,18 +5,18 @@ namespace CookingChaos.InputEvents
 {
     public interface IInputEventInterface
     {
-        public void OnInputStart(SpriteRenderer _renderer);
-        public void OnInputCanceled(SpriteRenderer _renderer);
-        public void OnInputPerformed(SpriteRenderer _renderer);
+        public void OnInputStart(GameObject _targetObject);
+        public void OnInputCanceled(GameObject _targetObject);
+        public void OnInputPerformed(GameObject _targetObject);
     }
 
     public interface IHoldEventInterface
     {
-        public void OnHoldStart(SpriteRenderer _renderer, float _holdingDuration);
+        public void OnHoldStart(GameObject _targetObject, float _holdingDuration);
     }
 
     public interface IMultiTapEventInterface
     {
-        public void OnMultiTapStart(SpriteRenderer _renderer, int _multitapCount);
+        public void OnMultiTapStart(GameObject _targetObject, int _multitapCount);
     }
 }

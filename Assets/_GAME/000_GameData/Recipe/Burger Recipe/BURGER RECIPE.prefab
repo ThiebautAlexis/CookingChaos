@@ -24,13 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361965126477602386}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.24, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4878660535216205866}
-  m_Father: {fileID: 4878660535474998107}
-  m_RootOrder: 3
+  m_Father: {fileID: 4878660536622023474}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4009784073473911338
 GameObject:
@@ -146,7 +146,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4878660536622023474}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4878660535185970072
 SpriteRenderer:
@@ -216,7 +216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4878660535209284429
 Transform:
   m_ObjectHideFlags: 0
@@ -225,11 +225,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4878660535209284434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.18, y: -4.36, z: 0}
+  m_LocalPosition: {x: 0, y: -4.29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4878660536622023474}
+  m_Father: {fileID: 4878660535510276521}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4878660535209284428
@@ -308,7 +308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4878660535216205867}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 19, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -579,7 +579,7 @@ GameObject:
   - component: {fileID: 4878660535474998107}
   - component: {fileID: 782551858217879701}
   m_Layer: 0
-  m_Name: Grill
+  m_Name: Grill - Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -592,16 +592,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4878660535474998104}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6196174961779882183}
   - {fileID: 2004934398269119882}
-  - {fileID: 4878660536699804219}
-  - {fileID: 7531966365128948047}
-  m_Father: {fileID: 4878660536622023474}
+  m_Father: {fileID: 8045032435961851477}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &782551858217879701
@@ -686,6 +684,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4878660536101344501}
+  - {fileID: 4878660535209284429}
   m_Father: {fileID: 4878660535216205866}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -855,7 +854,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4878660536622023474}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4878660536069252570
 SpriteRenderer:
@@ -1071,10 +1070,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4878660535474998107}
-  - {fileID: 4878660535209284429}
+  - {fileID: 7531966365128948047}
   - {fileID: 4878660536069252571}
   - {fileID: 4878660535185970073}
+  - {fileID: 8045032435961851477}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1090,31 +1089,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5e5dad825c04f48a7e211e754775eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  events:
-  - Event: {fileID: 11400000, guid: 531b9e7e324fde5438ecf6d8e9bd699d, type: 2}
-    renderer: {fileID: 6371962633282064534}
+  inputEvents:
+  - recipeEvent: {fileID: 11400000, guid: ff58f5cbc3bf4fc4dbbc2f65948aff2c, type: 2}
+    targetObject: {fileID: 4009784073473911338}
     activationKey: Grill
-  - Event: {fileID: 11400000, guid: 531b9e7e324fde5438ecf6d8e9bd699d, type: 2}
-    renderer: {fileID: 6371962633282064534}
+  - recipeEvent: {fileID: 11400000, guid: 531b9e7e324fde5438ecf6d8e9bd699d, type: 2}
+    targetObject: {fileID: 8811727052420345167}
     activationKey: Grill
-  - Event: {fileID: 11400000, guid: ff58f5cbc3bf4fc4dbbc2f65948aff2c, type: 2}
-    renderer: {fileID: 1178548463653756046}
-    activationKey: Grill
-  - Event: {fileID: 11400000, guid: 458daf02ec1e0754a93440a112c5700d, type: 2}
-    renderer: {fileID: 782551858217879701}
-    activationKey: Grill
-  - Event: {fileID: 11400000, guid: 9653b319b71fde44093a9b96e3b44190, type: 2}
-    renderer: {fileID: 4878660535321605034}
+  - recipeEvent: {fileID: 11400000, guid: 9653b319b71fde44093a9b96e3b44190, type: 2}
+    targetObject: {fileID: 4878660535321605032}
     activationKey: Salad
-  - Event: {fileID: 11400000, guid: 9653b319b71fde44093a9b96e3b44190, type: 2}
-    renderer: {fileID: 4878660536453027498}
+  - recipeEvent: {fileID: 11400000, guid: 9653b319b71fde44093a9b96e3b44190, type: 2}
+    targetObject: {fileID: 4878660536453027496}
     activationKey: Tomato
-  - Event: {fileID: 11400000, guid: 9653b319b71fde44093a9b96e3b44190, type: 2}
-    renderer: {fileID: 4878660535941110248}
+  - recipeEvent: {fileID: 11400000, guid: 9653b319b71fde44093a9b96e3b44190, type: 2}
+    targetObject: {fileID: 4878660535941110254}
     activationKey: Meat
-  - Event: {fileID: 11400000, guid: 9653b319b71fde44093a9b96e3b44190, type: 2}
-    renderer: {fileID: 4878660536671289247}
+  - recipeEvent: {fileID: 11400000, guid: 9653b319b71fde44093a9b96e3b44190, type: 2}
+    targetObject: {fileID: 4878660536671289245}
     activationKey: Cheese
+  failedInstructionEvents: []
+  completedInstructionEvents:
+  - recipeEvent: {fileID: 11400000, guid: 1c1a3675c4925a047a787acac8935bc2, type: 2}
+    targetObject: {fileID: 6127378002761128785}
+    activationKey: 0
+  - recipeEvent: {fileID: 11400000, guid: 1c1a3675c4925a047a787acac8935bc2, type: 2}
+    targetObject: {fileID: 361965126477602386}
+    activationKey: 0
+  - recipeEvent: {fileID: 11400000, guid: af07ba834ef7d5049bebb74d48dce878, type: 2}
+    targetObject: {fileID: 6127378002761128785}
+    activationKey: 1
+  - recipeEvent: {fileID: 11400000, guid: 67fbfa7d56e9c3e4a964ac1627c01fcc, type: 2}
+    targetObject: {fileID: 4878660535209284434}
+    activationKey: 1
+  - recipeEvent: {fileID: 11400000, guid: 9653b319b71fde44093a9b96e3b44190, type: 2}
+    targetObject: {fileID: 4878660535467801553}
+    activationKey: 1
 --- !u!1 &4878660536671289245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,12 +1234,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4878660536699804216}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.24, y: 0, z: 0}
+  m_LocalPosition: {x: 19, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4878660535474998107}
-  m_RootOrder: 2
+  m_Father: {fileID: 8045032435961851477}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7156974406539273158
 SpriteRenderer:
@@ -1283,6 +1293,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &6127378002761128785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8045032435961851477}
+  m_Layer: 0
+  m_Name: 'Backgrounds Parent '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8045032435961851477
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6127378002761128785}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4878660535474998107}
+  - {fileID: 4878660536699804219}
+  m_Father: {fileID: 4878660536622023474}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8811727052420345167
 GameObject:
   m_ObjectHideFlags: 0

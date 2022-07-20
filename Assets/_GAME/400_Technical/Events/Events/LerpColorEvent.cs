@@ -15,17 +15,19 @@ namespace CookingChaos.InputEvents
         #region Methods 
 
         #region Recipe Event
-        protected override void CallEventStart(UnityEngine.InputSystem.InputAction.CallbackContext _context, SpriteRenderer _spriteRenderer)
+        public override void CallEvent(GameObject _targetObject) {}
+
+        protected override void CallEventStart(UnityEngine.InputSystem.InputAction.CallbackContext _context, GameObject _targetObject)
         {
-            base.CallEventStart(_context, _spriteRenderer);
-            OnHoldStart(_spriteRenderer, (_context.interaction as UnityEngine.InputSystem.Interactions.HoldInteraction).duration);
+            base.CallEventStart(_context, _targetObject);
+            OnHoldStart(_targetObject, (_context.interaction as UnityEngine.InputSystem.Interactions.HoldInteraction).duration);
         }
         #endregion
 
         #region IInputEventStart
-        public override void OnInputCanceled(SpriteRenderer _renderer)
+        public override void OnInputCanceled(GameObject _targetObject)
         {
-            base.OnInputCanceled(_renderer);
+            base.OnInputCanceled(_targetObject);
             if(sequence.IsActive())
             {
                 sequence.Pause();
@@ -35,14 +37,17 @@ namespace CookingChaos.InputEvents
         #endregion
 
         #region IHoldEventInterface
-        public void OnHoldStart(SpriteRenderer _renderer, float _holdingDuration)
+        public void OnHoldStart(GameObject _targetObject, float _holdingDuration)
         {
-            if (sequence.IsActive())
-                sequence.Kill(false);
-            sequence = DOTween.Sequence();
+            if(_targetObject.TryGetComponent(out SpriteRenderer _renderer))
             {
-                _renderer.DOGradientColor(colorGradient, _holdingDuration);
-            };
+                if (sequence.IsActive())
+                    sequence.Kill(false);
+                sequence = DOTween.Sequence();
+                {
+                    _renderer.DOGradientColor(colorGradient, _holdingDuration);
+                };
+            }
         }
         #endregion
 

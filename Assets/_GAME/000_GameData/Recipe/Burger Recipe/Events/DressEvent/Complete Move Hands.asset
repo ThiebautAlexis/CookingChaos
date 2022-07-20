@@ -10,15 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ed72923cfbe402408a7a02245b3c4a5, type: 3}
-  m_Name: Move To Position Burger
+  m_Name: Complete Move Hands
   m_EditorClassIdentifier: 
   targetPositions:
-  - {x: 0, y: 0.9}
-  - {x: 0, y: 1.1}
-  - {x: 0, y: 1.4}
-  - {x: 0, y: 1.6}
-  - {x: 0, y: 2.25}
-  attributes: {fileID: 11400000, guid: 390dfb7660fe6e24baecb4c18c9ed9ee, type: 2}
-  eventActivation: 1
-  overrideSortingOrder: 1
-  movementDelay: 0
+  - {x: 0, y: -0.65}
+  attributes: {fileID: 11400000, guid: 77237c317ea080f43aa65f6e8344a0d6, type: 2}
+  eventActivation: 0
+  overrideSortingOrder: 0
+  movementDelay: 0.1

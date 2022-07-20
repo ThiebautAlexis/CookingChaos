@@ -12,11 +12,11 @@ namespace CookingChaos
         #region Events 
         public static event Action OnInstructionSucceded;
         public static event Action OnInstructionFailed;
-        public event Action<InputAction.CallbackContext> OnTriggerEvent;
+        public static event Action<InputAction.CallbackContext> OnTriggerInstruction;
         #endregion
 
         #region Fields and Properties
-        public int Index { get; set; }
+        public int Index;
         [SerializeField] private InputActionMap inputActions;
         private float progress = 0f;
 
@@ -33,8 +33,7 @@ namespace CookingChaos
 
         private void TriggerAction(InputAction.CallbackContext context)
         {
-            OnTriggerEvent?.Invoke(context);
-            // RecipeHandler.EventHandler.OnCallEvent(context);
+            OnTriggerInstruction?.Invoke(context);
             if(context.performed)
             {
                 context.action.Disable();
@@ -49,6 +48,7 @@ namespace CookingChaos
 
         public void Deactivate()
         {
+            inputActions.actionTriggered -= TriggerAction;
             inputActions.Disable();
         }
         #endregion

@@ -9,7 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06ccd993a94b6b842bc95f2cb5f9e532, type: 3}
-  m_Name: HideGrillEvent
+  m_Script: {fileID: 11500000, guid: 3ed72923cfbe402408a7a02245b3c4a5, type: 3}
+  m_Name: Complete Move BG
   m_EditorClassIdentifier: 
-  activationKey: Grill
+  targetPositions:
+  - {x: -38, y: 0}
+  attributes: {fileID: 11400000, guid: 77237c317ea080f43aa65f6e8344a0d6, type: 2}
+  eventActivation: 0
+  overrideSortingOrder: 0
+  movementDelay: 0.25

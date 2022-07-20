@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4395405b5c5499a4cbbc522bd00471e2, type: 3}
   m_Name: Spatula Movement Attribute
   m_EditorClassIdentifier: 
-  MovementSpeed: 15
-  MovementEase: 12
+  MovementSpeed: 25
+  MovementEase: 1
