@@ -15,6 +15,8 @@ namespace CookingChaos.Recipe.Editor
 
         private SerializedProperty recipeInstructionsProperty;
         private SerializedProperty eventsHandlerProperty;
+        private SerializedProperty scoreProperty;
+        private SerializedProperty settingsProperty;
         private ListView listView;
         #endregion
 
@@ -23,6 +25,8 @@ namespace CookingChaos.Recipe.Editor
         {
             recipeInstructionsProperty = serializedObject.FindProperty(RecipeAsset.ReceipeInstructionsPropertyName);
             eventsHandlerProperty = serializedObject.FindProperty(RecipeAsset.EventsHandlerPropertyName);
+            scoreProperty = serializedObject.FindProperty(RecipeAsset.ScorePropertyName);
+            settingsProperty = serializedObject.FindProperty(RecipeAsset.SettingsPropertyName);
         }
 
 
@@ -40,13 +44,18 @@ namespace CookingChaos.Recipe.Editor
             _list.itemsAdded += OnItemsAdded;
             _list.BindProperty(recipeInstructionsProperty);
             listView = _list;
-            _inspectorContainer.Add(_list);
 
             // Event Handler
             PropertyField _propertyField = _inspectorContainer.Q<PropertyField>("events-handler");
             _propertyField.BindProperty(eventsHandlerProperty);
-            _inspectorContainer.Add(_propertyField);
 
+            // Score
+            IntegerField _scoreField = _inspectorContainer.Q<IntegerField>("score");
+            _scoreField.BindProperty(scoreProperty);
+
+            // Settings
+            PropertyField _settingsField = _inspectorContainer.Q<PropertyField>("settings");
+            _settingsField.BindProperty(settingsProperty);
 
             return _inspectorContainer;
         }

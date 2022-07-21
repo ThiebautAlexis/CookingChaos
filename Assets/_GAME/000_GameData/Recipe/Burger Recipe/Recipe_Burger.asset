@@ -83,6 +83,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Cheese
       m_Flags: 0
+  minBaseDuration: {x: 0.5, y: 2.5}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +101,8 @@ MonoBehaviour:
   - {fileID: -5785630103593176830}
   - {fileID: 9096815477348221996}
   eventsHandler: {fileID: 1779917338879053968, guid: 38c9b3b44cc4fc14c93e5b1670c5ffd2, type: 3}
+  score: 100
+  settings: {fileID: 11400000, guid: 76e3fe369bbce7b469a91230d8f04342, type: 2}
 --- !u!114 &4435023816322135286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +138,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Grill
       m_Flags: 0
+  minBaseDuration: {x: 0.75, y: 2}
 --- !u!114 &9096815477348221996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,3 +174,4 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Flag
       m_Flags: 0
+  minBaseDuration: {x: 0.5, y: 2.5}
