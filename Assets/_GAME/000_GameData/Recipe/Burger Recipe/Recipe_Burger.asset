@@ -83,7 +83,8 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Cheese
       m_Flags: 0
-  minBaseDuration: {x: 0.5, y: 2.5}
+  minBaseDuration: {x: 0.1, y: 5}
+  validInterval: {x: 0, y: 1}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,7 +139,8 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Grill
       m_Flags: 0
-  minBaseDuration: {x: 0.75, y: 2}
+  minBaseDuration: {x: 0.1, y: 5}
+  validInterval: {x: 0.25, y: 0.85}
 --- !u!114 &9096815477348221996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,4 +176,5 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Flag
       m_Flags: 0
-  minBaseDuration: {x: 0.5, y: 2.5}
+  minBaseDuration: {x: 0.1, y: 5}
+  validInterval: {x: 0, y: 1}
