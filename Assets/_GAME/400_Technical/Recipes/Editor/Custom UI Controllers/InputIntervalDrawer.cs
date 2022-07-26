@@ -14,6 +14,22 @@ namespace CookingChaos.Recipe.Editor
 
         private static readonly string backgroundName = "background";
         private static readonly string progressName = "progress";
+        private static readonly string maxValueName = "max-value";
+        private static readonly string minIntervalName = "min-interval";
+        private static readonly string maxIntervalName = "max-interval";
+
+        private float maxValue = 1f;
+        public float MaxValue
+        {
+            get { return maxValue; }
+            set 
+            {
+                maxValue = value;
+                if (maxIntervalLabel != null)
+                    maxIntervalLabel.text = maxValue.ToString("0.00");
+                SetProgress(m_value);
+            }
+        }
 
         public Vector2 m_value { get; set; }
         public virtual Vector2 value 
@@ -43,9 +59,9 @@ namespace CookingChaos.Recipe.Editor
                 }
             }
         }
+        #endregion
 
         #region UXML
-        #endregion
         public new class UxmlFactory : UxmlFactory<InputIntervalDrawer, UxmlTraits>
         {
             public UxmlFactory() { }
@@ -58,11 +74,14 @@ namespace CookingChaos.Recipe.Editor
             }
         }
         #endregion
-
+        
         #region Constructor
         private readonly VisualElement background;
         private readonly VisualElement progress;
-        
+        private readonly Label maxValueLabel;
+        private readonly Label minIntervalLabel;
+        private readonly Label maxIntervalLabel;
+
         public InputIntervalDrawer()
         {
             VisualTreeAsset _asset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(InputIntervalDrawer_UXML_Path);
@@ -74,7 +93,9 @@ namespace CookingChaos.Recipe.Editor
             RegisterCallback<GeometryChangedEvent>(OnGeometryChanged);
             background = _container.Q<VisualElement>(backgroundName);
             progress = _container.Q<VisualElement>(progressName);
-
+            maxValueLabel = _container.Q<Label>(maxValueName);
+            minIntervalLabel = _container.Q<Label>(minIntervalName);
+            maxIntervalLabel = _container.Q<Label>(maxIntervalName);
         }
 
         private void OnGeometryChanged(GeometryChangedEvent evt)
@@ -83,6 +104,7 @@ namespace CookingChaos.Recipe.Editor
         }
         #endregion
 
+        #region Methods
         public void SetValueWithoutNotify(Vector2 newValue)
         {
             m_value = newValue;
@@ -105,7 +127,29 @@ namespace CookingChaos.Recipe.Editor
 
             float _maxWidth = background.layout.width - 2;
             progress.style.left = _left * _maxWidth;
+            if(minIntervalLabel!=null)
+            {
+                if (_left > .1f)
+                {
+                    minIntervalLabel.style.left = progress.style.left;
+                    minIntervalLabel.text = (_left * maxValue).ToString("0.00");
+                }
+                else
+                    minIntervalLabel.text = string.Empty;
+            }
+
             progress.style.right = _maxWidth - (_right * _maxWidth);
+            if(maxIntervalLabel != null)
+            {
+                if (_right < .9f)
+                {
+                    maxIntervalLabel.style.right = progress.style.right;
+                    maxIntervalLabel.text = (_right * maxValue).ToString("0.00");
+                }
+                else
+                    maxIntervalLabel.text = string.Empty;
+            }
         }
+        #endregion
     }
 }

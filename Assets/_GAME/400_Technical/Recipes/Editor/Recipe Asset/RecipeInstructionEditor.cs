@@ -14,11 +14,6 @@ namespace CookingChaos.Recipe.Editor
         {
             VisualElement _container = new VisualElement();
             InspectorElement.FillDefaultInspector(_container, serializedObject, this);
-            /*
-            MinMaxSlider _slider = new MinMaxSlider("Valid Interval", _intervalProperty.vector2Value.x, _intervalProperty.vector2Value.y, 0f, 1f);
-            _slider.BindProperty(_intervalProperty);
-            _container.Add(_slider);
-            */
 
             InputIntervalDrawer _drawer = new InputIntervalDrawer();
             SerializedProperty _intervalProperty = serializedObject.FindProperty(RecipeInstruction.IntervalPropertyName);
@@ -26,6 +21,7 @@ namespace CookingChaos.Recipe.Editor
             
 
             _drawer.BindProperty(_intervalProperty);
+            _drawer.MaxValue = _durationProperty.vector2Value.y;
             _container.Add(_drawer);
 
             return _container;

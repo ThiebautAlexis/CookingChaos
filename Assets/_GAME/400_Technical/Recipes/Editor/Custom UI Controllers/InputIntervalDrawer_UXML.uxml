@@ -5,6 +5,8 @@
             <ui:VisualElement name="border" style="flex-shrink: 0; flex-grow: 1; background-color: rgba(37, 106, 19, 0); overflow: visible; position: absolute; left: 0; top: 0; right: 0; bottom: 0; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; display: flex; border-left-color: rgb(32, 32, 32); border-right-color: rgb(32, 32, 32); border-top-color: rgb(32, 32, 32); border-bottom-color: rgb(32, 32, 32); visibility: visible; margin-left: -2px; margin-right: -2px; margin-top: -2px; margin-bottom: -2px;" />
             <ui:Label text="0" display-tooltip-when-elided="false" name="min-value" style="position: absolute; top: 110%; font-size: 12px; left: 0;" />
             <ui:Label text="1" display-tooltip-when-elided="false" name="max-value" style="position: absolute; top: 110%; right: 1px; left: 98%;" />
+            <ui:Label text="0" display-tooltip-when-elided="false" name="min-interval" style="position: absolute; top: 110%; font-size: 12px; left: 0;" />
+            <ui:Label text="1" display-tooltip-when-elided="false" name="max-interval" style="position: absolute; top: 110%; right: 55px; left: 0; -unity-text-align: upper-right;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

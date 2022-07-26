@@ -21,9 +21,15 @@ namespace CookingChaos
         [SerializeField] private InputActionMap inputActions;
         [SerializeField] private Vector2 minBaseDuration = new Vector2(.1f, 5f);
         [SerializeField] private Vector2 validInterval = new Vector2(0f, 1f);
-        // [SerializeField] private InputInterval validInterval = new InputInterval(.1f,.5f);
         private float progress = 0f;
         private Sequence instructionSequence;
+
+        public float Duration
+        {
+            get {
+                return Mathf.Max(minBaseDuration.x, minBaseDuration.y); // Multiply by speed here
+            }
+        }
         #endregion
 
         #region Methods 
@@ -40,14 +46,13 @@ namespace CookingChaos
             _rebindAction.Start();
             */
 
-            /*
-            float _duration = Mathf.Max(minBaseDuration.x, minBaseDuration.y); // Multiply by speed here
+            
             if (instructionSequence.IsActive())
                 instructionSequence.Kill();
             instructionSequence = DOTween.Sequence();
-            instructionSequence.AppendInterval(_duration);
+            instructionSequence.AppendInterval(Duration);
             instructionSequence.AppendCallback(FailAction);
-            */
+            
 
             inputActions.actionTriggered += TriggerAction;
             inputActions.Enable();
@@ -55,22 +60,30 @@ namespace CookingChaos
 
         private void TriggerAction(InputAction.CallbackContext context)
         {
-            OnTriggerInstruction?.Invoke(context);
-            if(context.performed)
+            if(IsIntervalValid(instructionSequence.fullPosition))
             {
-                context.action.Disable();
-                progress += (1f / inputActions.actions.Count);
-                if (progress >= 1f)
+                OnTriggerInstruction?.Invoke(context);
+                if(context.performed)
                 {
-                    OnInstructionSucceded?.Invoke();
-                    Deactivate();
+                    context.action.Disable();
+                    progress += (1f / inputActions.actions.Count);
+                    if (progress >= 1f)
+                    {
+                        OnInstructionSucceded?.Invoke();
+                        Deactivate();
+                    }
                 }
+            }
+            else
+            {
+                FailAction();
             }
         }
 
+        private bool IsIntervalValid(float _time) => (_time >= validInterval.x * Duration && _time <= validInterval.y * Duration);
+
         private void FailAction()
         {
-            Debug.Log("Fail Instruction");
             OnInstructionFailed?.Invoke();
             Deactivate();
         }
@@ -82,18 +95,5 @@ namespace CookingChaos
             inputActions.Disable();
         }
         #endregion
-    }
-
-    [System.Serializable]
-    public class InputInterval
-    {
-        [SerializeField] private Vector2 minBaseDuration;
-        [SerializeField] private Vector2 validInterval;
-
-        public InputInterval(float _minDuration, float _baseDuration)
-        {
-            minBaseDuration = new Vector2(_minDuration, _baseDuration);
-            validInterval = new Vector2(0f, 1f);
-        }
     }
 }
