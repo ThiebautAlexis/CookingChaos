@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CookingChaos
@@ -7,13 +5,17 @@ namespace CookingChaos
     [CreateAssetMenu(fileName = "RecipeSettings", menuName = "Cooking Chaos/Recipe Settings", order = 150)]
     public class RecipeSettings : ScriptableObject
     {
+        [Header("Start Stop Settings")]
+        public float StartInstructionDuration = .5f;
+        public float ActivateInstructionDuration = .5f;
+
         [Header("Complete Settings")]
-        public float CompleteInstructionTransitionDuration = .5f;
-        public float CompleteRecipeTransitionDuration = .5f;
+        public float CompleteInstructionDuration = .5f;
+        public float CompleteRecipeDuration = .5f;
 
         [Header("Fail Settings")]
-        public float FailInstructionTransitionDuration = .5f;
-        public float FailRecipeTransitionDuration = .5f;
+        public float FailInstructionDuration = .5f;
+        public float FailRecipeDuration = .5f;
 
 
     }

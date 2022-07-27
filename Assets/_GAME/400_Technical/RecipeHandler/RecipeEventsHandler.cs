@@ -7,6 +7,7 @@ namespace CookingChaos
     public class RecipeEventsHandler : MonoBehaviour
     {
         #region Fields and Properties
+        [SerializeField] private RecipeEventActivator<int>[] startInstructionEvents;
         [SerializeField] private RecipeEventActivator<string>[] inputEvents;
         [SerializeField] private RecipeEventActivator<int>[] failedInstructionEvents;
         [SerializeField] private RecipeEventActivator<int>[] completedInstructionEvents;
@@ -16,8 +17,9 @@ namespace CookingChaos
         private void OnEnable()
         {
             RecipeInstruction.OnTriggerInstruction += OnCallEvent;
-            RecipeAsset.OnInstructionFailed += OnFailInstructionEvent;
-            RecipeAsset.OnInstructionCompleted += OnCompleteInstructionEvent;
+            RecipeAsset.OnInstructionStarted += OnStartInstructionEvents;
+            RecipeAsset.OnInstructionFailed += OnFailInstructionEvents;
+            RecipeAsset.OnInstructionCompleted += OnCompleteInstructionEvents;
 
             foreach (var recipeEvent in inputEvents)
                 recipeEvent.ResetEvent();
@@ -30,8 +32,9 @@ namespace CookingChaos
         private void OnDisable()
         {
             RecipeInstruction.OnTriggerInstruction -= OnCallEvent;
-            RecipeAsset.OnInstructionFailed += OnFailInstructionEvent;
-            RecipeAsset.OnInstructionCompleted += OnCompleteInstructionEvent;
+            RecipeAsset.OnInstructionStarted -= OnStartInstructionEvents;
+            RecipeAsset.OnInstructionFailed -= OnFailInstructionEvents;
+            RecipeAsset.OnInstructionCompleted -= OnCompleteInstructionEvents;
         }
 
         private void OnCallEvent(InputAction.CallbackContext context)
@@ -43,8 +46,17 @@ namespace CookingChaos
             }
         }
 
-        #region Failed / Success  Events
-        private void OnFailInstructionEvent(int _index)
+        #region Start / Failed / Success  Events
+        private void OnStartInstructionEvents(int _index)
+        {
+            for (int i = 0; i < startInstructionEvents.Length; i++)
+            {
+                if (startInstructionEvents[i].ActivationKey == _index)
+                    startInstructionEvents[i].CallEvent();
+            }
+        }
+
+        private void OnFailInstructionEvents(int _index)
         {
             for (int i = 0; i < failedInstructionEvents.Length; i++)
             {
@@ -53,7 +65,7 @@ namespace CookingChaos
             }
         }
 
-        private void OnCompleteInstructionEvent(int _index)
+        private void OnCompleteInstructionEvents(int _index)
         {
             for (int i = 0; i < completedInstructionEvents.Length; i++)
             {

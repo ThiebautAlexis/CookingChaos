@@ -23,6 +23,7 @@ namespace CookingChaos
 
         public static event Action<float> OnRecipeCompleted;
         public static event Action OnRecipeFailed;
+        public static event Action<int> OnInstructionStarted;
         public static event Action<int> OnInstructionCompleted;
         public static event Action<int> OnInstructionFailed;
 
@@ -33,6 +34,8 @@ namespace CookingChaos
 
         [SerializeField] private int score = 100;
         [SerializeField] private RecipeSettings settings;
+
+        private Sequence transitionSequence = null;
         #endregion
 
         #region Methods
@@ -42,13 +45,14 @@ namespace CookingChaos
             index = 0;
             RecipeInstruction.OnInstructionSucceded += CompleteInstruction;
             RecipeInstruction.OnInstructionFailed += FailInstruction;
-            instructions[index].Activate();
+            StartInstruction();
         }
 
         public void Deactivate()
         {
             RecipeInstruction.OnInstructionSucceded -= CompleteInstruction;
             RecipeInstruction.OnInstructionFailed -= FailInstruction;
+            transitionSequence.Kill();
         }
 
         /*
@@ -65,33 +69,46 @@ namespace CookingChaos
         }
         */
 
+        private void StartInstruction()
+        {
+            if (transitionSequence.IsActive())
+                transitionSequence.Kill(true);
+            transitionSequence = DOTween.Sequence();
+            transitionSequence.AppendInterval(settings.StartInstructionDuration);
+            transitionSequence.AppendCallback(StartInstructionCallback);
+            transitionSequence.AppendInterval(settings.ActivateInstructionDuration);
+            transitionSequence.AppendCallback(instructions[index].Activate);
+
+            void StartInstructionCallback() => OnInstructionStarted?.Invoke(index);
+        }
+
         private void CompleteInstruction()
         {
             instructions[index].Deactivate();
 
-            Sequence sequence = DOTween.Sequence();
-            sequence.AppendInterval(settings.CompleteInstructionTransitionDuration);
-            sequence.AppendCallback(CompleteInstructionCallback);
+            transitionSequence = DOTween.Sequence();
+            transitionSequence.AppendInterval(settings.CompleteInstructionDuration);
+            transitionSequence.AppendCallback(CompleteInstructionCallback);
 
             void CompleteInstructionCallback()
             {
                 OnInstructionCompleted?.Invoke(index);
                 index++;
                 if (index >= instructions.Length)
-                {
-                    // Recipe Complete!
                     CompleteRecipe();
-                    return;
-                }
-                instructions[index].Activate();
+                else
+                    StartInstruction();
             }
         }
 
         private void CompleteRecipe()
         {
-            Sequence sequence = DOTween.Sequence();
-            sequence.AppendInterval(settings.CompleteRecipeTransitionDuration);
-            sequence.AppendCallback(CompleteRecipeCallback);
+            if (transitionSequence.IsActive())
+                transitionSequence.Kill(true);
+
+            transitionSequence = DOTween.Sequence();
+            transitionSequence.AppendInterval(settings.CompleteRecipeDuration);
+            transitionSequence.AppendCallback(CompleteRecipeCallback);
 
             void CompleteRecipeCallback()
             {
@@ -102,11 +119,11 @@ namespace CookingChaos
 
         private void FailInstruction()
         {
-            Sequence sequence = DOTween.Sequence();
-            sequence.AppendInterval(settings.FailInstructionTransitionDuration);
-            sequence.AppendCallback(InstructionFailedCallback);
-            sequence.AppendInterval(settings.FailRecipeTransitionDuration);
-            sequence.AppendCallback(RecipeFailedCallback);
+            transitionSequence = DOTween.Sequence();
+            transitionSequence.AppendInterval(settings.FailInstructionDuration);
+            transitionSequence.AppendCallback(InstructionFailedCallback);
+            transitionSequence.AppendInterval(settings.FailRecipeDuration);
+            transitionSequence.AppendCallback(RecipeFailedCallback);
 
             void InstructionFailedCallback() => OnInstructionFailed?.Invoke(index);
             void RecipeFailedCallback()

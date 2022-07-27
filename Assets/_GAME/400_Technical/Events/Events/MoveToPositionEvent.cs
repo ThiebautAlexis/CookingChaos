@@ -10,10 +10,11 @@ namespace CookingChaos.InputEvents
     {
         #region Fields and Properties
         [SerializeField] private Vector2[] targetPositions = new Vector2[] { };
-        [SerializeField] private MovementAttributes attributes;
         [SerializeField] private EventActivation eventActivation = EventActivation.None;
         [SerializeField] private bool overrideSortingOrder = false;
         [SerializeField] private float movementDelay = 0f;
+        [SerializeField] private float movementDuration = 1f;
+        [SerializeField] private Ease movementEase = Ease.Linear;
         private int currentIndex = 0;
         #endregion
 
@@ -26,13 +27,18 @@ namespace CookingChaos.InputEvents
                 _renderer.sortingOrder = currentIndex;
             }
 
-            float _time = Vector2.Distance(_targetObject.transform.position, targetPositions[currentIndex]) / attributes.MovementSpeed;
             Sequence movementSequence = DOTween.Sequence();
             {
                 movementSequence.AppendInterval(movementDelay);
-                movementSequence.Append(_targetObject.transform.DOLocalMove(targetPositions[currentIndex], _time).SetEase(attributes.MovementEase));
+                movementSequence.Append(_targetObject.transform.DOLocalMove(targetPositions[currentIndex], movementDuration).SetEase(movementEase));
+                movementSequence.onComplete += OnSequenceCompleted;
             };
             currentIndex++;
+
+            void OnSequenceCompleted()
+            {
+                movementSequence.Kill();
+            }
         }
 
         public override void OnInputPerformed(GameObject _targetObject)

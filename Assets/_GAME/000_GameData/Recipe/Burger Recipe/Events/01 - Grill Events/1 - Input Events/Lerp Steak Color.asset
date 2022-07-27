@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04f65e80c0529dd41a1dc9bd0c0ddaad, type: 3}
-  m_Name: LerpColorEvent_Steak
+  m_Name: Lerp Steak Color
   m_EditorClassIdentifier: 
   activationKey: Grill
   colorGradient:
