@@ -7,7 +7,7 @@ namespace CookingChaos
     {
         [Header("Start Stop Settings")]
         public float StartInstructionDuration = .5f;
-        public float ActivateInstructionDuration = .5f;
+        public float ActivateInstructionDelay = .5f;
 
         [Header("Complete Settings")]
         public float CompleteInstructionDuration = .5f;

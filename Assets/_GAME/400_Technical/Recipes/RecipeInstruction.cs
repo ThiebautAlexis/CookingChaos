@@ -22,7 +22,7 @@ namespace CookingChaos
         [SerializeField] private Vector2 minBaseDuration = new Vector2(.1f, 5f);
         [SerializeField] private Vector2 validInterval = new Vector2(0f, 1f);
         private float progress = 0f;
-        private Sequence instructionSequence;
+        private static Sequence instructionSequence;
 
         public float Duration
         {

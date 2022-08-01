@@ -47,8 +47,9 @@ namespace CookingChaos
         }
 
         #region Start / Failed / Success  Events
-        private void OnStartInstructionEvents(int _index)
+        private void OnStartInstructionEvents(RecipeInstructionInfo _info)
         {
+            int _index = _info.Index;
             for (int i = 0; i < startInstructionEvents.Length; i++)
             {
                 if (startInstructionEvents[i].ActivationKey == _index)

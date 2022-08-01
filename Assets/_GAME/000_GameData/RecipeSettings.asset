@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08ba5541ae60f5142bea1848dde6918d, type: 3}
   m_Name: RecipeSettings
   m_EditorClassIdentifier: 
-  StartInstructionDuration: 0.25
-  ActivateInstructionDuration: 0.75
+  StartInstructionDuration: 0.5
+  ActivateInstructionDelay: 1
   CompleteInstructionDuration: 0.75
   CompleteRecipeDuration: 1.25
   FailInstructionDuration: 0.25

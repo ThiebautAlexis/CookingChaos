@@ -23,7 +23,7 @@ namespace CookingChaos
 
         public static event Action<float> OnRecipeCompleted;
         public static event Action OnRecipeFailed;
-        public static event Action<int> OnInstructionStarted;
+        public static event Action<RecipeInstructionInfo> OnInstructionStarted;
         public static event Action<int> OnInstructionCompleted;
         public static event Action<int> OnInstructionFailed;
 
@@ -35,7 +35,7 @@ namespace CookingChaos
         [SerializeField] private int score = 100;
         [SerializeField] private RecipeSettings settings;
 
-        private Sequence transitionSequence = null;
+        private static Sequence transitionSequence = null;
         #endregion
 
         #region Methods
@@ -74,12 +74,29 @@ namespace CookingChaos
             if (transitionSequence.IsActive())
                 transitionSequence.Kill(true);
             transitionSequence = DOTween.Sequence();
-            transitionSequence.AppendInterval(settings.StartInstructionDuration);
-            transitionSequence.AppendCallback(StartInstructionCallback);
-            transitionSequence.AppendInterval(settings.ActivateInstructionDuration);
-            transitionSequence.AppendCallback(instructions[index].Activate);
+            {
+                transitionSequence.AppendInterval(settings.StartInstructionDuration);
+                transitionSequence.AppendCallback(StartInstructionCallback);
+                transitionSequence.AppendInterval(settings.ActivateInstructionDelay);
+                transitionSequence.AppendCallback(ActivateInstruction);
+            }
 
-            void StartInstructionCallback() => OnInstructionStarted?.Invoke(index);
+            // Local Methods \\
+            void StartInstructionCallback()
+            {
+                RecipeInstructionInfo _info = new RecipeInstructionInfo()
+                {
+                    Index = index,
+                    Delay = settings.ActivateInstructionDelay,
+                    Duration = instructions[index].Duration
+                };  
+                OnInstructionStarted?.Invoke(_info);
+            }
+
+            void ActivateInstruction()
+            {
+                instructions[index].Activate();
+            }
         }
 
         private void CompleteInstruction()
@@ -133,6 +150,14 @@ namespace CookingChaos
             }
         }
         #endregion
+
+    }
+
+    public struct RecipeInstructionInfo
+    {
+        public int Index;
+        public float Delay;
+        public float Duration;
 
     }
 }

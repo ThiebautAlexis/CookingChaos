@@ -1,0 +1,16 @@
+{
+    "name": "CookingChaos.UI",
+    "rootNamespace": "CookingChaos.UI",
+    "references": [
+        "GUID:1d501e471fbdf7344896be3b62ba66f2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
