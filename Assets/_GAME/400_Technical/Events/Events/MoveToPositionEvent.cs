@@ -19,7 +19,19 @@ namespace CookingChaos.InputEvents
         #endregion
 
         #region Methods 
+
         public override void CallEvent(GameObject _targetObject)
+        {
+            RecipeInstructionInfo _info = new RecipeInstructionInfo
+            {
+                Index = 0,
+                BeforeStartDelay = movementDelay,
+                BeforeActivationDelay = movementDuration 
+            };
+            CallEvent(_targetObject, _info);
+
+        } 
+        public override void CallEvent(GameObject _targetObject, RecipeInstructionInfo _info)
         {
             if (currentIndex >= targetPositions.Length) currentIndex = 0;
             if (overrideSortingOrder && _targetObject.TryGetComponent(out SpriteRenderer _renderer))
@@ -29,8 +41,8 @@ namespace CookingChaos.InputEvents
 
             Sequence movementSequence = DOTween.Sequence();
             {
-                movementSequence.AppendInterval(movementDelay);
-                movementSequence.Append(_targetObject.transform.DOLocalMove(targetPositions[currentIndex], movementDuration).SetEase(movementEase));
+                movementSequence.AppendInterval(_info.BeforeStartDelay);
+                movementSequence.Append(_targetObject.transform.DOLocalMove(targetPositions[currentIndex], _info.BeforeActivationDelay).SetEase(movementEase));
                 movementSequence.onComplete += OnSequenceCompleted;
             };
             currentIndex++;
@@ -44,23 +56,49 @@ namespace CookingChaos.InputEvents
         public override void OnInputPerformed(GameObject _targetObject)
         {
             if (eventActivation == EventActivation.OnPerformed)
-                CallEvent(_targetObject);
+            {
+                RecipeInstructionInfo _info = new RecipeInstructionInfo
+                {
+                    Index = 0,
+                    BeforeStartDelay = movementDelay,
+                    BeforeActivationDelay = movementDuration
+                };
+                CallEvent(_targetObject, _info);
+            }
         }
 
         public override void OnInputCanceled(GameObject _targetObject)
         {
             if (eventActivation == EventActivation.OnCanceled)
-                CallEvent(_targetObject);
+            {
+
+                RecipeInstructionInfo _info = new RecipeInstructionInfo
+                {
+                    Index = 0,
+                    BeforeStartDelay = movementDelay,
+                    BeforeActivationDelay = movementDuration
+                };
+                CallEvent(_targetObject, _info);
+            }
         }
 
         public override void OnInputStart(GameObject _targetObject)
         {
             if (eventActivation == EventActivation.OnStarted)
-                CallEvent(_targetObject);
+            {
+
+                RecipeInstructionInfo _info = new RecipeInstructionInfo
+                {
+                    Index = 0,
+                    BeforeStartDelay = movementDelay,
+                    BeforeActivationDelay = movementDuration
+                };
+                CallEvent(_targetObject, _info);
+            }
         }
 
         public override void ResetEvent() => currentIndex = 0;
-        
+
         #endregion
     }
 }

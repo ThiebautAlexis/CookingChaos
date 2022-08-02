@@ -7,6 +7,7 @@ namespace CookingChaos
     public class RecipeEventsHandler : MonoBehaviour
     {
         #region Fields and Properties
+        [Header("Events")]
         [SerializeField] private RecipeEventActivator<int>[] startInstructionEvents;
         [SerializeField] private RecipeEventActivator<string>[] inputEvents;
         [SerializeField] private RecipeEventActivator<int>[] failedInstructionEvents;
@@ -53,7 +54,7 @@ namespace CookingChaos
             for (int i = 0; i < startInstructionEvents.Length; i++)
             {
                 if (startInstructionEvents[i].ActivationKey == _index)
-                    startInstructionEvents[i].CallEvent();
+                    startInstructionEvents[i].CallEvent(_info);
             }
         }
 
@@ -88,7 +89,7 @@ namespace CookingChaos
         public T ActivationKey => activationKey;
 
         public void CallEvent() => recipeEvent.CallEvent(targetObject);
-
+        public void CallEvent(RecipeInstructionInfo _info) => recipeEvent.CallEvent(targetObject, _info);
         public void CallInputEvent(InputAction.CallbackContext _context) => recipeEvent.CallEvent(_context, targetObject);
 
         public void ResetEvent() => recipeEvent.ResetEvent();

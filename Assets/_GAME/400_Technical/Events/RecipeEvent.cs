@@ -14,6 +14,7 @@ namespace CookingChaos.InputEvents
 
         #region Methods 
         public abstract void CallEvent(GameObject _targetObject);
+        public abstract void CallEvent(GameObject _targetObject, RecipeInstructionInfo _info);
 
         public virtual void CallEvent(InputAction.CallbackContext context, GameObject _targetObject)
         {

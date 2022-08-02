@@ -206,7 +206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4009784073473911338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.72, y: -1.61, z: 0}
+  m_LocalPosition: {x: 6.31, y: -1.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1195,6 +1195,18 @@ MonoBehaviour:
   - recipeEvent: {fileID: 11400000, guid: 67fbfa7d56e9c3e4a964ac1627c01fcc, type: 2}
     targetObject: {fileID: 4878660535209284434}
     activationKey: 1
+  - recipeEvent: {fileID: 11400000, guid: b9e83fce60e7e394191c9a0b75707382, type: 2}
+    targetObject: {fileID: 8811727052420345167}
+    activationKey: 0
+  - recipeEvent: {fileID: 11400000, guid: b9e83fce60e7e394191c9a0b75707382, type: 2}
+    targetObject: {fileID: 8811727052420345167}
+    activationKey: 0
+  - recipeEvent: {fileID: 11400000, guid: ed91b3eb8f3010045ac0fbc63cb1ba4f, type: 2}
+    targetObject: {fileID: 8811727052420345167}
+    activationKey: 0
+  - recipeEvent: {fileID: 11400000, guid: 886c77b0ae5ec0a4b9c421d184a5ac91, type: 2}
+    targetObject: {fileID: 4009784073473911338}
+    activationKey: 0
 --- !u!1 &4878660536671289245
 GameObject:
   m_ObjectHideFlags: 0

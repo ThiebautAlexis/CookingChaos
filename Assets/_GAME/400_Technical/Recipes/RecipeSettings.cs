@@ -6,7 +6,7 @@ namespace CookingChaos
     public class RecipeSettings : ScriptableObject
     {
         [Header("Start Stop Settings")]
-        public float StartInstructionDuration = .5f;
+        public float StartInstructionDelay = .5f;
         public float ActivateInstructionDelay = .5f;
 
         [Header("Complete Settings")]

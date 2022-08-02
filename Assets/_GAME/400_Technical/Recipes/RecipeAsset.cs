@@ -75,7 +75,7 @@ namespace CookingChaos
                 transitionSequence.Kill(true);
             transitionSequence = DOTween.Sequence();
             {
-                transitionSequence.AppendInterval(settings.StartInstructionDuration);
+                transitionSequence.AppendInterval(settings.StartInstructionDelay);
                 transitionSequence.AppendCallback(StartInstructionCallback);
                 transitionSequence.AppendInterval(settings.ActivateInstructionDelay);
                 transitionSequence.AppendCallback(ActivateInstruction);
@@ -87,7 +87,8 @@ namespace CookingChaos
                 RecipeInstructionInfo _info = new RecipeInstructionInfo()
                 {
                     Index = index,
-                    Delay = settings.ActivateInstructionDelay,
+                    BeforeStartDelay = settings.StartInstructionDelay,
+                    BeforeActivationDelay = settings.ActivateInstructionDelay,
                     Duration = instructions[index].Duration
                 };  
                 OnInstructionStarted?.Invoke(_info);
@@ -156,7 +157,8 @@ namespace CookingChaos
     public struct RecipeInstructionInfo
     {
         public int Index;
-        public float Delay;
+        public float BeforeStartDelay;
+        public float BeforeActivationDelay;
         public float Duration;
 
     }

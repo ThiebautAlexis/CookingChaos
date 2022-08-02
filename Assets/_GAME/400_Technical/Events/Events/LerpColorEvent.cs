@@ -15,7 +15,9 @@ namespace CookingChaos.InputEvents
         #region Methods 
 
         #region Recipe Event
-        public override void CallEvent(GameObject _targetObject) {}
+
+        public override void CallEvent(GameObject _targetObject){}
+        public override void CallEvent(GameObject _targetObject, RecipeInstructionInfo _info) {}
 
         protected override void CallEventStart(UnityEngine.InputSystem.InputAction.CallbackContext _context, GameObject _targetObject)
         {

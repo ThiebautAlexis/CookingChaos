@@ -3,8 +3,7 @@
     "rootNamespace": "CookingChaos",
     "references": [
         "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:9aab89f55e619af49b9a0856c2716565",
-        "GUID:6d07f60a2eda1c246bfb9ae7da833617"
+        "GUID:9aab89f55e619af49b9a0856c2716565"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
